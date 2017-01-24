@@ -1,0 +1,20 @@
+version: '2'
+services:
+  caliper:
+    image: pfgray/caliper
+    ports:
+      - "9000:9000"
+    links:
+      - couch
+    environment:
+      NODE_ENV: production
+      COUCH_HOST: couch
+      COUCH_PORT: 5984
+      COUCH_DB_NAME: caliper
+      HOST_PROTOCOL: http
+      HOST_DOMAIN: "${HOST_DOMAIN}"
+      HOST_PORT: "${HOST_DOMAIN}"
+  couch:
+    image: klaemo/couchdb:2.0.0
+    expose:
+      - "5984"
